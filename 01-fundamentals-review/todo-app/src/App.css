@@ -82,6 +82,69 @@
   font-size: 1em;
   background-color: rgba(255, 255, 255, 0.1);
   box-sizing: border-box;
+  color: inherit;
+  transition: background-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: 2px solid #646cff;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.action-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.action-button {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 500;
+  background-color: #646cff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #535bf2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(100, 108, 255, 0.3);
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.stats span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stats span::before {
+  content: '';
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #646cff, #4ade80);
+  border-radius: 2px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -99,5 +162,21 @@
 
   .todo-item.completed .todo-title {
     color: rgba(0, 0, 0, 0.4);
+  }
+
+  .search-input {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .search-input:focus {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .stats {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  .action-button:hover {
+    box-shadow: 0 4px 8px rgba(100, 108, 255, 0.2);
   }
 }
