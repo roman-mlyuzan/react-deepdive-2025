@@ -9,7 +9,7 @@ interface Todo {
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
   const [searchText, setSearchText] = useState<string>('')
 
