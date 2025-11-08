@@ -4,7 +4,7 @@ A systematic exploration of React patterns and best practices from an experience
 
 ## About
 
-I'm a senior full-stack developer with 6 years of TypeScript/JavaScript experience, specializing in Angular (versions 5-19). While I have prior React exposure, I'm now working through React fundamentals to advanced patterns methodically—ensuring zero gaps and building production-ready expertise.
+I'm a senior front-end developer with 7+ years of TypeScript/JavaScript experience, specializing in Angular (versions 5-19). While I have prior React exposure, I'm now working through React fundamentals to advanced patterns methodically—ensuring zero gaps and building production-ready expertise.
 
 This repository documents my learning journey, comparative insights between Angular and React, and serves as a comprehensive reference for future projects.
 
