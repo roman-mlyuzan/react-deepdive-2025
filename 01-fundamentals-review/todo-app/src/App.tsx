@@ -26,20 +26,21 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div className="loading">Loading...</div>
   }
 
   if (error) {
-    return <div>Error: {error}</div>
+    return <div className="error">Error: {error}</div>
   }
 
   return (
-    <div>
+    <div className="app-container">
       <h1>My Todos</h1>
-      <ul>
+      <ul className="todo-list">
         {todos.map(todo => (
-          <li key={todo.id}>
-            {todo.title} {todo.completed ? '✅' : '⭕'}
+          <li key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
+            <span className="todo-checkbox">{todo.completed ? '✅' : '⭕'}</span>
+            <span className="todo-title">{todo.title}</span>
           </li>
         ))}
       </ul>
