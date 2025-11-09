@@ -14,12 +14,10 @@ function App() {
   const [searchText, setSearchText] = useState<string>('')
   const [showCompleted, setShowCompleted] = useState<boolean>(false);
 
-  const filteredTodos = todos.filter(todo => {
-    if (showCompleted) {
-      return todo.completed;
-    }
-    return todo.title.toLowerCase().includes(searchText.toLowerCase())
-  });
+const filteredTodos = todos.filter(todo => {
+  const matchesSearch = todo.title.toLowerCase().includes(searchText.toLowerCase());
+  return showCompleted ? (matchesSearch && todo.completed) : matchesSearch;
+});
 
   const toggleTodo = async (id: number, currentStatus: boolean) => {
     try {

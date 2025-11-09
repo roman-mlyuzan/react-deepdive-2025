@@ -42,9 +42,15 @@ Core React concepts through hands-on projects.
 Deep dive into React Hooks and side effects.
 
 **Projects:**
-- **Todo App** 🚧 In Progress - `useEffect`, data fetching, form handling
+- **Todo App**  ✅ Complete - `useEffect`, data fetching, form handling
 - **useEffect Patterns** - Side effects, cleanup, dependency arrays
 - **Custom Hooks Library** - Extracting and reusing logic
+
+**Key Learnings:**
+- React's useEffect() vs. Angular's lifecycle hooks
+- Using Promise.allSettled() vs Promise.all(), handling gracefully failed delete requests
+- Displaying filtered list
+- Handling loading states 
 
 **Focus Areas:**
 - Understanding `useEffect` dependency arrays
@@ -78,16 +84,15 @@ Reference materials and comparative analyses.
 
 ## Learning Timeline
 
-**Week 1: Fundamentals Review** (Current)
+**Week 1: Fundamentals & Hooks** (Current)
 - ✅ Day 1: Tic-tac-toe game (completed)
-- 🚧 Day 2-3: Todo app with `useEffect` and API integration
-- ⏳ Day 4-5: Context API and `useReducer` patterns
+- ✅ Day 2-3: Todo app with `useEffect` and API integration (completed)
+- 🚧 Day 4-5: Custom hooks - extracting reusable logic
 
 **Week 2: Advanced Patterns**
-- Custom hooks library
-- Performance optimization
+- Context API and `useReducer` patterns
+- Performance optimization (useMemo, useCallback)
 - Component composition patterns
-- Real-world application architecture
 
 **Week 3: Production & Interview Readiness**
 - Full-featured project
@@ -131,12 +136,10 @@ Reference materials and comparative analyses.
 
 | Phase | Status | Completion | Current Focus |
 |-------|--------|------------|---------------|
-| Fundamentals Review | 🚧 In Progress | 25% | Moving to hooks |
-| Hooks Mastery | ⏳ Upcoming | 0% | useEffect next |
+| Fundamentals Review | ✅ Complete | 100% | - |
+| Hooks Mastery | 🚧 In Progress | 35% | Custom hooks next |
 | Real-world Patterns | ⏳ Planned | 0% | - |
 | Production Project | ⏳ Planned | 0% | - |
-
-**Last Updated:** [Today's Date]
 
 ## Technical Stack
 
@@ -179,6 +182,6 @@ Reference materials and comparative analyses.
 
 ---
 
-**Repository Status:** Active Learning | **Last Updated:** 07/11/25 | **Current Phase:** Fundamentals & Hooks
+**Repository Status:** Active Learning | **Last Updated:** 09/11/25 | **Current Phase:** Fundamentals & Hooks
 
 *Systematic learning, documented progress, production-ready results.*
