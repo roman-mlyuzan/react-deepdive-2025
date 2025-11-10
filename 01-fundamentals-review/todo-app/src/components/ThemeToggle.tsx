@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export function ThemeToggle() {
   const [theme, setTheme] = useLocalStorage<"light" | "dark">("theme", "light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   return (
     <div className="theme-toggle-container">
