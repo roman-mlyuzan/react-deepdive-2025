@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTodos } from "./hooks/useTodos";
 import "./App.css";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 function App() {
   const { todos, loading, error, toggleTodo, removeCompleted, setTodos } =
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <ThemeToggle />
       <h1>My Todos</h1>
       <div className="action-bar">
         <button onClick={() => setTodos([])} className="action-button">
