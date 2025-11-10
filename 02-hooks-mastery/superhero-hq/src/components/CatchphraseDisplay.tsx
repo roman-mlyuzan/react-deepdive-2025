@@ -1,11 +1,9 @@
-import type { Hero } from "../types/hero";
+import { useHero } from "../context/HeroContext";
 import styles from "./CatchphraseDisplay.module.css";
 
-type Props = {
-  hero: Hero;
-};
+export default function CatchphraseDisplay() {
+  const { hero } = useHero();
 
-export default function CatchphraseDisplay({ hero }: Props) {
   return (
     <div className={styles.catchphraseDisplay}>
       <h3>Hero Catchphrase</h3>

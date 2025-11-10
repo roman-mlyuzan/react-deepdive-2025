@@ -1,11 +1,9 @@
-import type { Hero } from "../types/hero";
+import { useHero } from "../context/HeroContext";
 import styles from "./SidekickCorner.module.css";
 
-type Props = {
-  hero: Hero;
-};
+export default function SidekickCorner() {
+  const { hero } = useHero();
 
-export default function SidekickCorner({ hero }: Props) {
   return (
     <div className={styles.sidekickCorner}>
       <h3>Sidekick Corner</h3>
