@@ -61,7 +61,6 @@ Deep dive into React Hooks and side effects.
 - Custom hooks pattern
 - Cross-tab sync
 - Supporting updater functions
--
 
 **Focus Areas:**
 
