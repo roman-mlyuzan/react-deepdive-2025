@@ -48,19 +48,31 @@ Deep dive into React Hooks and side effects.
 
 **Projects:**
 
-- **Todo App** ✅ Complete - `useEffect`, data fetching, form handling
-- **useEffect Patterns** ✅ Complete - Side effects, cleanup, dependency arrays
-- **Custom Hooks Library** ✅ Complete - Extracting and reusing logic
+- **[Todo App](./02-hooks-mastery/todo-app)** ✅ Complete
+
+  - Data fetching with `useEffect` and dependency arrays
+  - Search/filter functionality with controlled inputs
+  - Bulk delete with `Promise.allSettled()` for graceful error handling
+  - **Custom Hooks Implementation:**
+    - useTodos - Encapsulates todo CRUD operations, API calls, and loading state management
+    - useLocalStorage - Syncs React state with localStorage and provides cross-tab synchronization
+  - **Theme Toggle** - Demonstrates `useLocalStorage` in practice with persistent theme switchin
+
+- **[Superhero HQ](./02-hooks-mastery/superhero-hq)** ✅ Complete
+  - Demonstrates Context API for sharing state across components
+  - Eliminates prop drilling through Provider/Consumer pattern
+  - Custom hook pattern (`useHero`) for clean context consumption
 
 **Key Learnings:**
 
-- React's useEffect() vs. Angular's lifecycle hooks
-- Using Promise.allSettled() vs Promise.all(), handling gracefully failed delete requests
-- Displaying filtered list
-- Handling loading states
-- Custom hooks pattern
-- Cross-tab sync
-- Supporting updater functions
+- React's `useEffect()` as unified lifecycle hook (ngOnInit + ngOnChanges + ngOnDestroy)
+- Dependency array patterns: `[]` (mount only), `[deps]` (on change), none (every render)
+- Controlled inputs pattern for form handling and real-time filtering
+- Extracting reusable logic into custom hooks for separation of concerns
+- Updater function patterns: `setState(value)` and `setState(prev => value)`
+- useEffect cleanup functions to prevent memory leaks (removing event listeners on unmount)
+- Context API pattern for sharing state without prop drilling (React's answer to Angular DI)
+- Cross-tab synchronization using browser's `storage` event API
 
 **Focus Areas:**
 
@@ -100,16 +112,17 @@ Reference materials and comparative analyses.
 
 ## Learning Timeline
 
-**Week 1: Fundamentals & Hooks** (Current)
+**Week 1: Fundamentals & Hooks** ✅ Complete
 
-- ✅ Day 1: Tic-tac-toe game (completed)
-- ✅ Day 2-3: Todo app with `useEffect` and API integration (completed)
-- ✅ Day 4-5: Custom hooks - extracting reusable logic
+- ✅ Day 1: Tic-tac-toe game
+- ✅ Day 2-3: Todo app with `useEffect` and API integration
+- ✅ Day 4-5: Custom hooks (`useTodos`, `useLocalStorage`)
+- ✅ Day 6: Context API and cross-component state sharing
 
-**Week 2: Advanced Patterns**
+**Week 2: Advanced Patterns** (Current)
 
-- Context API and `useReducer` patterns
-- Performance optimization (useMemo, useCallback)
+- Day 7: Performance optimization (useMemo, useCallback, React.memo)
+- useReducer for complex state logic
 - Component composition patterns
 
 **Week 3: Production & Interview Readiness**
@@ -143,6 +156,18 @@ Reference materials and comparative analyses.
 - **Angular:** Opinionated framework with built-in solutions (routing, forms, HTTP client)
 - **React:** Minimal library focused on UI, compose your own architecture
 
+### Pattern Equivalents
+
+**Dependency Injection & Services:**
+
+- **Angular:** Injectable services accessed via DI
+- **React:** Context API with Provider/Consumer pattern
+
+**Content Projection:**
+
+- **Angular:** `<ng-content>` for component slots
+- **React:** `children` prop for component composition
+
 ### What's Working Well
 
 - JSX feels natural after the initial learning curve
@@ -159,12 +184,12 @@ Reference materials and comparative analyses.
 
 ## Progress Tracking
 
-| Phase               | Status         | Completion | Current Focus |
-| ------------------- | -------------- | ---------- | ------------- |
-| Fundamentals Review | ✅ Complete    | 100%       | -             |
-| Hooks Mastery       | ✅ Complete    | 100%       | -             |
-| Real-world Patterns | 🚧 In Progress | 0%         | -             |
-| Production Project  | ⏳ Planned     | 0%         | -             |
+| Phase               | Status         | Completion | Current Focus            |
+| ------------------- | -------------- | ---------- | ------------------------ |
+| Fundamentals Review | ✅ Complete    | 100%       | -                        |
+| Hooks Mastery       | ✅ Complete    | 100%       | -                        |
+| Real-world Patterns | 🚧 In Progress | 20%        | Performance Optimization |
+| Production Project  | ⏳ Planned     | 0%         | -                        |
 
 ## Technical Stack
 
