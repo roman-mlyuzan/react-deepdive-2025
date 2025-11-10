@@ -1,0 +1,57 @@
+.catchphraseDisplay {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border-radius: 8px;
+  padding: 1.5rem;
+  color: white;
+  box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.catchphraseDisplay::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 5rem;
+  opacity: 0.2;
+  font-family: Georgia, serif;
+}
+
+.catchphraseDisplay h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.quote {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin: 1rem 0;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.author {
+  text-align: right;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .catchphraseDisplay {
+    padding: 1rem;
+  }
+
+  .catchphraseDisplay h3 {
+    font-size: 1.1rem;
+  }
+
+  .quote {
+    font-size: 1rem;
+  }
+}

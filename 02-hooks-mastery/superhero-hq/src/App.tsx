@@ -14,11 +14,11 @@ function App() {
   };
 
   return (
-    <>
+    <div className="app-container">
       <Header hero={hero} />
       <MainPanel hero={hero} />
       <Sidebar hero={hero} />
-    </>
+    </div>
   );
 }
 

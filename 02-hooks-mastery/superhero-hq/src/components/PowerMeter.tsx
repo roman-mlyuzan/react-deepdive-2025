@@ -1,4 +1,5 @@
 import type { Hero } from "../types/hero";
+import styles from "./PowerMeter.module.css";
 
 type Props = {
   hero: Hero;
@@ -6,11 +7,13 @@ type Props = {
 
 export default function PowerMeter({ hero }: Props) {
   return (
-    <div>
+    <div className={styles.powerMeter}>
       <h3>Power Meter</h3>
-      <p>Hero: {hero.name}</p>
-      <p>Power Level: {hero.powerLevel}</p>
-      <p>Costume: {hero.costume}</p>
+      <p>Hero: <span>{hero.name}</span></p>
+      <p>
+        Power Level: <span className={styles.powerLevel}>{hero.powerLevel}</span>
+      </p>
+      <p>Costume: <span>{hero.costume}</span></p>
     </div>
   );
 }

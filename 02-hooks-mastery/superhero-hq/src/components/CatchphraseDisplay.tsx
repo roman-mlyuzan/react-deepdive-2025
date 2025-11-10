@@ -1,4 +1,5 @@
 import type { Hero } from "../types/hero";
+import styles from "./CatchphraseDisplay.module.css";
 
 type Props = {
   hero: Hero;
@@ -6,10 +7,10 @@ type Props = {
 
 export default function CatchphraseDisplay({ hero }: Props) {
   return (
-    <div>
+    <div className={styles.catchphraseDisplay}>
       <h3>Hero Catchphrase</h3>
-      <p>"{hero.catchphrase}"</p>
-      <p>- {hero.name}</p>
+      <p className={styles.quote}>"{hero.catchphrase}"</p>
+      <p className={styles.author}>- {hero.name}</p>
     </div>
   );
 }
