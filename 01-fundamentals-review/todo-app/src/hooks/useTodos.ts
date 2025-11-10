@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocalStorage } from "./useLocalStorage";
 
 interface Todo {
   id: number;
@@ -7,7 +8,7 @@ interface Todo {
 }
 
 export function useTodos() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useLocalStorage<Todo[]>("todoItems", []);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
