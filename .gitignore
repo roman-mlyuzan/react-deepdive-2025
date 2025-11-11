@@ -4,3 +4,4 @@ build/
 .env.local
 .settings/
 .vscode/
+docs-claude/

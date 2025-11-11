@@ -53,10 +53,27 @@ Deep dive into React Hooks and side effects.
   - Data fetching with `useEffect` and dependency arrays
   - Search/filter functionality with controlled inputs
   - Bulk delete with `Promise.allSettled()` for graceful error handling
+
   - **Custom Hooks Implementation:**
-    - useTodos - Encapsulates todo CRUD operations, API calls, and loading state management
-    - useLocalStorage - Syncs React state with localStorage and provides cross-tab synchronization
+
+    - `useTodos` - Encapsulates todo CRUD operations, API calls, and loading state management
+    - `useLocalStorage` - Syncs React state with localStorage and provides cross-tab synchronization
+    - `useTodoStats` - Memoized statistics calculations demonstrating performance optimization
+
   - **Theme Toggle** - Demonstrates `useLocalStorage` in practice with persistent theme switchin
+
+- **Performance Optimization:**
+
+  - Component memoization with `React.memo`
+  - Calculation caching with `useMemo`
+  - Callback stabilization with `useCallback`
+  - Statistics panel with optimized re-render behavior
+
+  - **UI Patterns:**
+
+  - Native `<dialog>` element for modals with backdrop handling
+  - Form validation and controlled inputs
+  - Optimistic UI updates
 
 - **[Superhero HQ](./02-hooks-mastery/superhero-hq)** ✅ Complete
   - Demonstrates Context API for sharing state across components
@@ -73,6 +90,10 @@ Deep dive into React Hooks and side effects.
 - useEffect cleanup functions to prevent memory leaks (removing event listeners on unmount)
 - Context API pattern for sharing state without prop drilling (React's answer to Angular DI)
 - Cross-tab synchronization using browser's `storage` event API
+- **Performance optimization trio:** `useMemo`, `useCallback`, and `React.memo` working together
+- Understanding when NOT to optimize (avoiding premature optimization)
+- Identifying unnecessary re-renders through console logging and Strict Mode behavior
+- Native browser APIs: `<dialog>` element with `showModal()`, backdrop clicks, ESC key handling
 
 **Focus Areas:**
 
@@ -102,7 +123,9 @@ Full-featured application demonstrating combined patterns and best practices.
 
 ### 📁 [docs/](./docs)
 
-Reference materials and comparative analyses.
+- **[Angular ↔ React Rosetta Stone](./docs/angular-react-rosetta-stone.md)** - Direct concept mappings between frameworks
+- **[Common Pitfalls](./docs/common-pitfalls.md)** - Mistakes to avoid and solutions
+- **[Performance Optimization Guide](./docs/performance-optimization.md)** - Comprehensive optimization strategies
 
 **Contents:**
 
@@ -112,25 +135,33 @@ Reference materials and comparative analyses.
 
 ## Learning Timeline
 
-**Week 1: Fundamentals & Hooks** ✅ Complete
+**Days 1-2: Fundamentals** ✅ Complete
 
-- ✅ Day 1: Tic-tac-toe game
-- ✅ Day 2-3: Todo app with `useEffect` and API integration
-- ✅ Day 4-5: Custom hooks (`useTodos`, `useLocalStorage`)
-- ✅ Day 6: Context API and cross-component state sharing
+- ✅ Tic-tac-toe game (component composition, state management, immutability)
 
-**Week 2: Advanced Patterns** (Current)
+**Days 3-5: Hooks Mastery** ✅ Complete
 
-- Day 7: Performance optimization (useMemo, useCallback, React.memo)
-- useReducer for complex state logic
-- Component composition patterns
+- ✅ Todo app with `useEffect` and API integration
+- ✅ Custom hooks (`useTodos`, `useLocalStorage`)
+- ✅ Context API (Superhero HQ project)
+- ✅ Cross-tab synchronization
 
-**Week 3: Production & Interview Readiness**
+**Days 6-7: Performance Optimization** ✅ Complete
 
-- Full-featured project
-- Code challenge practice
-- System design scenarios
-- Technical interview preparation
+- ✅ Component memoization with `React.memo`
+- ✅ Calculation optimization with `useMemo`
+- ✅ Callback stabilization with `useCallback`
+- ✅ Custom hooks for reusable logic (`useTodoStats`)
+- ✅ Native `<dialog>` API integration
+- ✅ Understanding re-render patterns and optimization strategies
+
+**Next: Production Project & Advanced Patterns**
+
+- Full-featured dashboard application
+- React Router integration
+- State management (Zustand/Redux Toolkit)
+- Advanced performance techniques
+- Production deployment
 
 ## Key Insights: Angular → React
 
@@ -184,12 +215,13 @@ Reference materials and comparative analyses.
 
 ## Progress Tracking
 
-| Phase               | Status         | Completion | Current Focus            |
-| ------------------- | -------------- | ---------- | ------------------------ |
-| Fundamentals Review | ✅ Complete    | 100%       | -                        |
-| Hooks Mastery       | ✅ Complete    | 100%       | -                        |
-| Real-world Patterns | 🚧 In Progress | 20%        | Performance Optimization |
-| Production Project  | ⏳ Planned     | 0%         | -                        |
+| Phase                    | Status         | Completion | Current Focus           |
+| ------------------------ | -------------- | ---------- | ----------------------- |
+| Fundamentals Review      | ✅ Complete    | 100%       | -                       |
+| Hooks Mastery            | ✅ Complete    | 100%       | -                       |
+| Performance Optimization | ✅ Complete    | 100%       | -                       |
+| Real-world Patterns      | 🚧 In Progress | 25%        | Planning production app |
+| Production Project       | ⏳ Planned     | 0%         | Architecture & setup    |
 
 ## Technical Stack
 
@@ -224,8 +256,9 @@ Reference materials and comparative analyses.
 
 - ✅ Solidify React fundamentals with comprehensive understanding
 - ✅ Master Hooks patterns and create custom hooks
-- ⏳ Understand React's reconciliation and rendering model
-- ⏳ Build production-quality, performant components
+- ✅ Understand performance optimization strategies
+- ⏳ Build production-quality, performant applications
+- ⏳ Master React Router and advanced routing patterns
 - ⏳ Successfully interview for senior React positions
 - ⏳ Contribute to React open source ecosystem
 
@@ -236,6 +269,6 @@ Reference materials and comparative analyses.
 
 ---
 
-**Repository Status:** Active Learning | **Last Updated:** 10/11/25 | **Current Phase:** Fundamentals & Hooks
+**Repository Status:** Active Learning | **Last Updated:** 11/11/25 | **Current Phase:** Fundamentals & Hooks
 
 _Systematic learning, documented progress, production-ready results._
