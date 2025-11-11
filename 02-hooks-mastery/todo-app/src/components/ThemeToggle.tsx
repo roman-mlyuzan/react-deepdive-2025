@@ -8,17 +8,14 @@ export function ThemeToggle() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
   return (
     <div className="theme-toggle-container">
       <p>Current theme: {theme}</p>
-      <button
-        className={`theme-toggle-button active`}
-        onClick={() =>
-          setTheme((prev: "light" | "dark") =>
-            prev === "light" ? "dark" : "light"
-          )
-        }
-      >
+      <button className={`theme-toggle-button active`} onClick={toggleTheme}>
         {theme === "light" ? "🌙 Dark" : "☀️ Light"}
       </button>
     </div>

@@ -1,14 +1,25 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
+import AddTodoDialog from "./components/AddTodoDialog";
 import { ThemeToggle } from "./components/ThemeToggle";
+import TodoList from "./components/TodoList";
+import TodoStats from "./components/TodoStats";
 import { useTodos } from "./hooks/useTodos";
 
 function App() {
-  const { todos, loading, error, toggleTodo, removeCompleted, setTodos } =
-    useTodos();
+  const {
+    todos,
+    loading,
+    error,
+    toggleTodo,
+    removeCompleted,
+    setTodos,
+    addTodo,
+  } = useTodos();
 
   const [searchText, setSearchText] = useState<string>("");
   const [showCompleted, setShowCompleted] = useState<boolean>(false);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   const filteredTodos = useMemo(() => {
     return todos.filter((todo) => {
@@ -22,6 +33,23 @@ function App() {
   const filterCompleted = () => {
     setShowCompleted((status) => !status);
   };
+
+  const handleRefreshStats = useCallback(() => {
+    console.log("Stats refreshed manually");
+    // Maybe fetch fresh data from server?
+  }, []);
+
+  const openDialog = useCallback(() => {
+    setIsDialogOpen(true);
+  }, []);
+
+  const closeDialog = useCallback(() => {
+    setIsDialogOpen(false);
+  }, []);
+
+  const handleAddTodo = useCallback((title: string) => {
+    addTodo(title);
+  }, []);
 
   // Runs on every render
   useEffect(() => {
@@ -44,7 +72,11 @@ function App() {
   return (
     <div className="app-container">
       <ThemeToggle />
+      <TodoStats todos={todos} onRefresh={handleRefreshStats} />
       <h1>My Todos</h1>
+      <button onClick={openDialog} className="btn-add-todo">
+        ➕ Add New Todo
+      </button>
       <div className="action-bar">
         <button onClick={() => setTodos([])} className="action-button">
           Clear All Todos
@@ -64,24 +96,12 @@ function App() {
         placeholder="Search todos..."
         className="search-input"
       />
-      <div className="stats">
-        <span>Total Todos: {todos.length}</span>
-        <span>Completed: {todos.filter((todo) => todo.completed).length}</span>
-      </div>
-      <ul className="todo-list">
-        {filteredTodos.map((todo) => (
-          <li
-            onClick={() => toggleTodo(todo.id, todo.completed)}
-            key={todo.id}
-            className={`todo-item ${todo.completed ? "completed" : ""}`}
-          >
-            <span className="todo-checkbox">
-              {todo.completed ? "✅" : "⭕"}
-            </span>
-            <span className="todo-title">{todo.title}</span>
-          </li>
-        ))}
-      </ul>
+      <TodoList todos={filteredTodos} toggleTodo={toggleTodo} />
+      <AddTodoDialog
+        isOpen={isDialogOpen}
+        onClose={closeDialog}
+        onAdd={handleAddTodo}
+      />
     </div>
   );
 }

@@ -1,11 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import type { Todo } from "../types/todo";
 import { useLocalStorage } from "./useLocalStorage";
-
-interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-}
 
 export function useTodos() {
   const [todos, setTodos] = useLocalStorage<Todo[]>("todoItems", []);
@@ -88,6 +83,29 @@ export function useTodos() {
     }
   };
 
+  const addTodo = useCallback(async (title: string) => {
+    try {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/todos",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title, completed: false }),
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to add todo");
+
+      const newTodo: Todo = await response.json();
+      setTodos((prevTodos) => [newTodo, ...prevTodos]);
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Failed to add todo");
+    }
+  }, []);
+
   return {
     todos,
     setTodos,
@@ -95,5 +113,6 @@ export function useTodos() {
     error,
     toggleTodo,
     removeCompleted,
+    addTodo,
   };
 }
