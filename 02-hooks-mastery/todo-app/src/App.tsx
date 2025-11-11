@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useTodos } from "./hooks/useTodos";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { useTodos } from "./hooks/useTodos";
 
 function App() {
   const { todos, loading, error, toggleTodo, removeCompleted, setTodos } =
@@ -10,12 +10,14 @@ function App() {
   const [searchText, setSearchText] = useState<string>("");
   const [showCompleted, setShowCompleted] = useState<boolean>(false);
 
-  const filteredTodos = todos.filter((todo) => {
-    const matchesSearch = todo.title
-      .toLowerCase()
-      .includes(searchText.toLowerCase());
-    return showCompleted ? matchesSearch && todo.completed : matchesSearch;
-  });
+  const filteredTodos = useMemo(() => {
+    return todos.filter((todo) => {
+      const matchesSearch = todo.title
+        .toLowerCase()
+        .includes(searchText.toLowerCase());
+      return showCompleted ? matchesSearch && todo.completed : matchesSearch;
+    });
+  }, [todos, searchText, showCompleted]);
 
   const filterCompleted = () => {
     setShowCompleted((status) => !status);
