@@ -252,3 +252,220 @@
 .theme-toggle-button.active:hover {
   background-color: var(--primary-hover);
 }
+
+/* Stats Panel Styles */
+.stats-panel {
+  background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--bg-tertiary);
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.stats-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.stats-panel h3 {
+  margin: 0 0 1rem 0;
+  color: var(--primary-color);
+  font-size: 1.1em;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 2px solid var(--bg-tertiary);
+  padding-bottom: 0.5rem;
+}
+
+.stats-panel p {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: var(--bg-secondary);
+  border-radius: 6px;
+  font-size: 0.95em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-panel p::before {
+  content: '•';
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-right: 0.5rem;
+}
+
+.stats-panel button {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px var(--button-shadow);
+}
+
+.stats-panel button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--button-shadow);
+}
+
+.stats-panel button:active {
+  transform: translateY(0);
+}
+
+/* Add New Todo Button */
+.btn-add-todo {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--success-color), #22c55e);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(74, 222, 128, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-add-todo:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(74, 222, 128, 0.4);
+}
+
+.btn-add-todo:active {
+  transform: translateY(-1px);
+}
+
+/* Dialog Styles */
+.add-todo-dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  max-width: 500px;
+  width: 90vw;
+  background-color: var(--bg-secondary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: var(--text-primary);
+}
+
+.add-todo-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.dialog-content {
+  padding: 2rem;
+}
+
+.dialog-content h2 {
+  margin: 0 0 1.5rem 0;
+  color: var(--primary-color);
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.95em;
+}
+
+.dialog-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid var(--bg-tertiary);
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.dialog-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--button-shadow);
+}
+
+.dialog-input::placeholder {
+  color: var(--text-muted);
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-cancel,
+.btn-submit {
+  flex: 1;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.btn-cancel:hover {
+  background-color: var(--bg-tertiary);
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  box-shadow: 0 2px 4px var(--button-shadow);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--button-shadow);
+}
+
+.btn-submit:disabled {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-submit:disabled:hover {
+  transform: none;
+}
+
+.btn-cancel:active,
+.btn-submit:active {
+  transform: translateY(0);
+}
