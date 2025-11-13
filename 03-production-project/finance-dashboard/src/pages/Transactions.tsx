@@ -1,7 +1,22 @@
+import { useRef, useState } from "react";
+import AddTransactionForm from "../components/transactions/AddTransactionForm";
 import { useTransactions } from "../hooks/useTransactions";
 
 export default function Transactions() {
-  const { transactions, loading, error, deleteTransaction } = useTransactions();
+  const { transactions, loading, error, createTransaction, deleteTransaction } =
+    useTransactions();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const openDialog = () => {
+    setIsDialogOpen(true);
+    dialogRef.current?.showModal();
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(false);
+    dialogRef.current?.close();
+  };
 
   if (loading) {
     return (
@@ -35,7 +50,10 @@ export default function Transactions() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Transactions</h1>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium">
+        <button
+          onClick={openDialog}
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
+        >
           Add transaction
         </button>
       </div>
@@ -94,6 +112,19 @@ export default function Transactions() {
           </table>
         </div>
       )}
+
+      <dialog
+        ref={dialogRef}
+        className="rounded-lg p-6 backdrop:bg-black/50 min-w-[500px] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        onClose={closeDialog}
+      >
+        {isDialogOpen && (
+          <AddTransactionForm
+            onAddTransaction={createTransaction}
+            onSuccess={closeDialog}
+          />
+        )}
+      </dialog>
     </div>
   );
 }
