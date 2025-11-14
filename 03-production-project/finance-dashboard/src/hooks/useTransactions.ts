@@ -57,6 +57,30 @@ export function useTransactions() {
     }
   };
 
+  const updateTransaction = async (
+    id: number,
+    updatedFields: Omit<Transaction, "id">
+  ) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const updatedTransaction: Transaction = await transactionApi.update(
+        id,
+        updatedFields
+      );
+      setTransactions((prev) =>
+        prev.map((t) => (t.id === id ? updatedTransaction : t))
+      );
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to update transaction"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchTransactions();
   }, []);
@@ -68,5 +92,6 @@ export function useTransactions() {
     refetch: fetchTransactions,
     createTransaction,
     deleteTransaction,
+    updateTransaction,
   };
 }

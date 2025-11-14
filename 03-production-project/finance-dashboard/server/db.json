@@ -1,7 +1,7 @@
 {
   "transactions": [
     {
-      "id": 1,
+      "id": "1",
       "description": "Salary",
       "amount": 5000,
       "category": "income",
@@ -9,7 +9,7 @@
       "type": "income"
     },
     {
-      "id": 2,
+      "id": "2",
       "description": "Grocery shopping",
       "amount": 150,
       "category": "food",
@@ -17,7 +17,7 @@
       "type": "expense"
     },
     {
-      "id": 3,
+      "id": "3",
       "description": "Uber ride",
       "amount": 25,
       "category": "transport",
@@ -25,7 +25,7 @@
       "type": "expense"
     },
     {
-      "id": 4,
+      "id": "4",
       "description": "Netflix subscription",
       "amount": 15,
       "category": "entertainment",
@@ -33,12 +33,28 @@
       "type": "expense"
     },
     {
-      "id": 5,
+      "id": "5",
       "description": "Electricity bill",
       "amount": 80,
       "category": "bills",
       "date": "2025-11-10",
       "type": "expense"
+    },
+    {
+      "id": "4d40",
+      "description": "Zakupy",
+      "amount": 250,
+      "category": "food",
+      "date": "2025-11-13",
+      "type": "expense"
+    },
+    {
+      "id": "742a",
+      "description": "yea",
+      "amount": 10,
+      "category": "food",
+      "date": "2025-11-12",
+      "type": "income"
     }
   ]
 }

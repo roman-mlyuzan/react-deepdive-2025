@@ -4,17 +4,22 @@ import {
   transactionSchema,
   type TransactionFormData,
 } from "../../schemas/transactionSchema";
-import { type Transaction } from "../../types/transaction";
+import type { Transaction } from "../../types/transaction";
 
-interface AddTransactionFormProps {
+interface editTransactionFormProps {
+  transaction: Transaction;
   onSuccess: () => void;
-  onAddTransaction: (transaction: Omit<Transaction, "id">) => Promise<void>;
+  onEditTransaction: (
+    id: number,
+    transaction: Omit<Transaction, "id">
+  ) => Promise<void>;
 }
 
-export default function AddTransactionForm({
+export default function EditTransactionForm({
+  transaction,
   onSuccess,
-  onAddTransaction,
-}: AddTransactionFormProps) {
+  onEditTransaction,
+}: editTransactionFormProps) {
   const {
     register,
     handleSubmit,
@@ -22,21 +27,21 @@ export default function AddTransactionForm({
     reset,
   } = useForm<TransactionFormData>({
     resolver: zodResolver(transactionSchema),
+    defaultValues: transaction,
   });
 
   const onSubmit = async (data: TransactionFormData) => {
     try {
-      await onAddTransaction(data);
+      await onEditTransaction(transaction.id, data);
       reset();
       onSuccess();
     } catch (error) {
-      console.error("Failed to add transaction:", error);
+      console.error("Failed to edit transaction:", error);
     }
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h2 className="text-xl font-semibold">Add transaction</h2>
+      <h2 className="text-xl font-semibold">Edit transaction</h2>
       <div>
         <label
           htmlFor="description"
@@ -140,7 +145,7 @@ export default function AddTransactionForm({
         disabled={isSubmitting}
         className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-        {isSubmitting ? "Adding..." : "Add transaction"}
+        {isSubmitting ? "Updating..." : "Update transaction"}
       </button>
     </form>
   );
