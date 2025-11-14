@@ -6,6 +6,7 @@ import {
   type PieLabel,
 } from "recharts";
 import type { Transaction } from "../../types/transaction";
+import { formatCurrency } from "../../utils/currency";
 
 interface SpendingByCategoryChart {
   transactions: Transaction[];
@@ -59,7 +60,7 @@ export default function SpendingByCategoryChart({
     category: string;
     amount: number;
   }) => {
-    return `${category}: $${amount.toFixed(2)}`;
+    return `${category}: ${formatCurrency(amount)}`;
   };
 
   return (
