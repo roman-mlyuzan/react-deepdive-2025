@@ -1,12 +1,13 @@
 import type { Transaction } from "../../types/transaction";
+import { formatCurrency } from "../../utils/currency";
 
-interface IncomeExpansesChartProps {
+interface IncomeExpansesStats {
   transactions: Transaction[];
 }
 
-export default function IncomeExpansesChart({
+export default function IncomeExpansesStats({
   transactions,
-}: IncomeExpansesChartProps) {
+}: IncomeExpansesStats) {
   const totalIncome = transactions
     .filter((t) => t.type === "income")
     .reduce((sum, t) => sum + t.amount, 0);
@@ -22,14 +23,14 @@ export default function IncomeExpansesChart({
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h3 className="text-gray-500 text-sm font-medium">Total Income</h3>
         <p className="text-3xl font-bold text-green-600 mt-2">
-          ${totalIncome.toFixed(2)}
+          {formatCurrency(totalIncome)}
         </p>
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h3 className="text-gray-500 text-sm font-medium">Total Expenses</h3>
         <p className="text-3xl font-bold text-red-600 mt-2">
-          ${totalExpenses.toFixed(2)}
+          {formatCurrency(totalExpenses)}
         </p>
       </div>
 
@@ -40,7 +41,7 @@ export default function IncomeExpansesChart({
             netBalance >= 0 ? "text-green-600" : "text-red-600"
           }`}
         >
-          ${netBalance.toFixed(2)}
+          {formatCurrency(netBalance)}
         </p>
       </div>
     </div>

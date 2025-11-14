@@ -1,5 +1,6 @@
 import { IncomeExpansesChart } from "../components/dashboard/IncomeExpansesChart";
 import IncomeExpansesStats from "../components/dashboard/IncomeExpansesStats";
+import SpendingByCategoryChart from "../components/dashboard/SpendingByCategoryChart";
 import { useTransactions } from "../hooks/useTransactions";
 
 export default function Dashboard() {
@@ -15,8 +16,14 @@ export default function Dashboard() {
 
   return (
     <>
-      <IncomeExpansesStats transactions={transactions} />
-      <IncomeExpansesChart transactions={transactions} />
+      <div className="space-y-6">
+        <IncomeExpansesStats transactions={transactions} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <IncomeExpansesChart transactions={transactions} />
+          <SpendingByCategoryChart transactions={transactions} />
+        </div>
+      </div>
     </>
   );
 }
