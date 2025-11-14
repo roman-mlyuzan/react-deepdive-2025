@@ -1,20 +1,39 @@
 import { useRef, useState } from "react";
 import AddTransactionForm from "../components/transactions/AddTransactionForm";
+import EditTransactionForm from "../components/transactions/EditTransactionForm";
 import { useTransactions } from "../hooks/useTransactions";
+import type { Transaction } from "../types/transaction";
 
 export default function Transactions() {
-  const { transactions, loading, error, createTransaction, deleteTransaction } =
-    useTransactions();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const {
+    transactions,
+    loading,
+    error,
+    createTransaction,
+    deleteTransaction,
+    updateTransaction,
+  } = useTransactions();
+  const [dialogMode, setDialogMode] = useState<"add" | "edit" | null>(null);
+  const [editingTransaction, setEditingTransaction] =
+    useState<Transaction | null>(null);
+
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const openDialog = () => {
-    setIsDialogOpen(true);
+  const openAddDialog = () => {
+    setDialogMode("add");
+    setEditingTransaction(null);
+    dialogRef.current?.showModal();
+  };
+
+  const openEditDialog = (transaction: Transaction) => {
+    setDialogMode("edit");
+    setEditingTransaction(transaction);
     dialogRef.current?.showModal();
   };
 
   const closeDialog = () => {
-    setIsDialogOpen(false);
+    setDialogMode(null);
+    setEditingTransaction(null);
     dialogRef.current?.close();
   };
 
@@ -51,7 +70,7 @@ export default function Transactions() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Transactions</h1>
         <button
-          onClick={openDialog}
+          onClick={openAddDialog}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
         >
           Add transaction
@@ -98,12 +117,18 @@ export default function Transactions() {
                     {transaction.type === "income" ? "+" : "-"}$
                     {transaction.amount.toFixed(2)}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-right">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-right space-x-4">
                     <button
                       onClick={() => handleDelete(transaction.id)}
-                      className="text-red-600 hover:text-red-900 font-medium"
+                      className="text-red-600 hover:text-red-900 font-medium pointer"
                     >
                       Delete
+                    </button>
+                    <button
+                      onClick={() => openEditDialog(transaction)}
+                      className="text-blue-600 hover:text-blue-900 font-medium pointer"
+                    >
+                      Edit
                     </button>
                   </td>
                 </tr>
@@ -114,14 +139,26 @@ export default function Transactions() {
       )}
 
       <dialog
+        onMouseDown={(e) => {
+          if (e.target === dialogRef.current) {
+            closeDialog();
+          }
+        }}
         ref={dialogRef}
         className="rounded-lg p-6 backdrop:bg-black/50 min-w-[500px] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         onClose={closeDialog}
       >
-        {isDialogOpen && (
+        {dialogMode === "add" && (
           <AddTransactionForm
             onAddTransaction={createTransaction}
             onSuccess={closeDialog}
+          />
+        )}
+        {dialogMode === "edit" && editingTransaction && (
+          <EditTransactionForm
+            onEditTransaction={updateTransaction}
+            onSuccess={closeDialog}
+            transaction={editingTransaction}
           />
         )}
       </dialog>
