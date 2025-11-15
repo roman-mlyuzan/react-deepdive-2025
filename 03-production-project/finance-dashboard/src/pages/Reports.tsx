@@ -80,7 +80,7 @@ export default function Reports() {
         <button
           onClick={handleExport}
           disabled={filteredTransactions.length === 0}
-          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg transform hover:scale-105 disabled:transform-none disabled:hover:shadow-none"
         >
           Export to CSV
         </button>

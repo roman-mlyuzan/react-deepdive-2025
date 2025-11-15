@@ -24,7 +24,7 @@ function SpentBudget({
   );
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       <div className="flex justify-between items-start mb-4">
         <div>
           <h3 className="text-xl font-semibold capitalize">
@@ -40,13 +40,13 @@ function SpentBudget({
         <div className="flex gap-2">
           <button
             onClick={onEdit}
-            className="text-blue-600 hover:text-blue-800"
+            className="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium"
           >
             Edit
           </button>
           <button
             onClick={onDelete}
-            className="text-red-600 hover:text-red-800"
+            className="text-red-600 hover:text-red-800 transition-colors duration-200 font-medium"
           >
             Delete
           </button>

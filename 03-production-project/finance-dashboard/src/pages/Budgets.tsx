@@ -113,14 +113,14 @@ export default function Budgets() {
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-200 hover:shadow-lg transform hover:scale-105"
           >
             Add Budget
           </button>
         )}
       </div>
       {isAdding && (
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white p-6 rounded-lg shadow-md animate-slide-in-left">
           <h2 className="text-xl font-semibold mb-4">
             {editingId ? "Edit Budget" : "Add New Budget"}
           </h2>
@@ -186,14 +186,14 @@ export default function Budgets() {
             <div className="flex gap-2">
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-200 hover:shadow-md"
               >
                 {editingId ? "Update Budget" : "Add Budget"}
               </button>
               <button
                 type="button"
                 onClick={handleCancel}
-                className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300"
+                className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-all duration-200"
               >
                 Cancel
               </button>
@@ -207,14 +207,19 @@ export default function Budgets() {
             No budgets yet. Add one to start tracking your spending limits!
           </div>
         ) : (
-          budgets.map((budget) => (
-            <SpentBudget
+          budgets.map((budget, index) => (
+            <div
               key={budget.id}
-              budget={budget}
-              transactions={transactions}
-              onDelete={() => handleDelete(budget.id)}
-              onEdit={() => setEditingId(budget.id)}
-            />
+              className="animate-fade-in"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <SpentBudget
+                budget={budget}
+                transactions={transactions}
+                onDelete={() => handleDelete(budget.id)}
+                onEdit={() => setEditingId(budget.id)}
+              />
+            </div>
           ))
         )}
       </div>
