@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import SpentBudget from "../components/budgets/SpentBudget";
 import { useTransactions } from "../hooks/useTransactions";
 import { useBudgetStore } from "../store/budgetStore";
+import type { BudgetFormData } from "../types/budget";
 import { TransactionCategory } from "../types/transaction";
 
-const DEFAULT_FORM = {
+const DEFAULT_FORM: BudgetFormData = {
   category: TransactionCategory.FOOD,
   amount: 0,
   month: new Date().toISOString().slice(0, 7), // "yyyy-mm"
@@ -16,7 +17,7 @@ export default function Budgets() {
 
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [formData, setFormData] = useState(DEFAULT_FORM);
+  const [formData, setFormData] = useState<BudgetFormData>(DEFAULT_FORM);
 
   useEffect(() => {
     if (editingId) {
@@ -103,7 +104,10 @@ export default function Budgets() {
               <select
                 value={formData.category}
                 onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, category: e.target.value }))
+                  setFormData((prev) => ({
+                    ...prev,
+                    category: e.target.value as typeof formData.category,
+                  }))
                 }
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
