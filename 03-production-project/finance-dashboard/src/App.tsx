@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ErrorBoundary from "./components/common/ErrorBoundary";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import ToastContainer from "./components/common/ToastContainer";
 import Layout from "./components/layout/Layout";
@@ -23,16 +24,51 @@ export default function App() {
               </ProtectedRoute>
             }
           >
-            <Route index element={<Dashboard />} />
-            <Route path="transactions" element={<Transactions />} />
-            <Route path="budgets" element={<Budgets />} />
-            <Route path="reports" element={<Reports />} />
-            <Route path="settings" element={<Settings />} />
+            <Route
+              index
+              element={
+                <ErrorBoundary>
+                  <Dashboard />{" "}
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="transactions"
+              element={
+                <ErrorBoundary>
+                  <Transactions />{" "}
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="budgets"
+              element={
+                <ErrorBoundary>
+                  <Budgets />{" "}
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="reports"
+              element={
+                <ErrorBoundary>
+                  <Reports />{" "}
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <ErrorBoundary>
+                  <Settings />{" "}
+                </ErrorBoundary>
+              }
+            />
           </Route>
 
           <Route path="/login" element={<Login />} />
         </Routes>
-      </BrowserRouter>{" "}
+      </BrowserRouter>
     </div>
   );
 }
