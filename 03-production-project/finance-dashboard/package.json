@@ -5,14 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "server": "json-server --watch server/db.json --port 3001",
+    "server": "node server/server.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@tanstack/react-virtual": "^3.13.12",
+    "cors": "^2.8.5",
     "date-fns": "^4.1.0",
+    "express": "^5.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.66.0",
