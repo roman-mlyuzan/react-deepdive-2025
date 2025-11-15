@@ -3,11 +3,13 @@ import IncomeExpansesStats from "../components/common/IncomeExpansesStats";
 import CategoryBreakdownTable from "../components/reports/CategoryBreakdownTable";
 import ReportsFilter from "../components/reports/ReportsFilter";
 import { useTransactions } from "../hooks/useTransactions";
+import { useToastStore } from "../store/toastStore";
 import { ReportPeriod, type ReportPeriodType } from "../types/report";
 import { exportTransactionsToCsv } from "../utils/exportToCsv";
 
 export default function Reports() {
   const { transactions, loading } = useTransactions();
+  const { addToast } = useToastStore();
   const [selectedPeriod, setSelectedPeriod] = useState<ReportPeriodType>(
     ReportPeriod.MONTH
   );
@@ -40,7 +42,13 @@ export default function Reports() {
       filename = "transactions-all.csv";
     }
 
-    exportTransactionsToCsv(filteredTransactions, filename);
+    const success = exportTransactionsToCsv(filteredTransactions, filename);
+
+    if (success) {
+      addToast("CSV file exported successfully", "success");
+    } else {
+      addToast("No transactions to export", "warning");
+    }
   };
 
   if (loading) return <div>Loading ...</div>;

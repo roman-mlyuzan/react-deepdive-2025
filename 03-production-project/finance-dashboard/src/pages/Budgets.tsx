@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SpentBudget from "../components/budgets/SpentBudget";
 import { useTransactions } from "../hooks/useTransactions";
 import { useBudgetStore } from "../store/budgetStore";
+import { useToastStore } from "../store/toastStore";
 import type { BudgetFormData } from "../types/budget";
 import { TransactionCategory } from "../types/transaction";
 
@@ -14,6 +15,7 @@ const DEFAULT_FORM: BudgetFormData = {
 export default function Budgets() {
   const { budgets, addBudget, updateBudget, deleteBudget } = useBudgetStore();
   const { transactions, loading } = useTransactions();
+  const { addToast } = useToastStore();
 
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -47,14 +49,16 @@ export default function Budgets() {
     );
 
     if (duplicate) {
-      alert("Budget for this category and month already exists");
+      addToast("Budget for this category and month already exists", "warning");
       return;
     }
 
     if (editingId) {
       updateBudget(editingId, formData);
+      addToast("Budget updated successfully", "success");
     } else {
       addBudget(formData);
+      addToast("Budget added successfully", "success");
     }
 
     // Reset form and close
@@ -67,6 +71,13 @@ export default function Budgets() {
     setIsAdding(false);
     setEditingId(null);
     setFormData(DEFAULT_FORM);
+  };
+
+  const handleDelete = (id: string) => {
+    if (confirm("Are you sure you want to delete this budget?")) {
+      deleteBudget(id);
+      addToast("Budget deleted successfully", "success");
+    }
   };
 
   if (loading) {
@@ -184,7 +195,7 @@ export default function Budgets() {
               key={budget.id}
               budget={budget}
               transactions={transactions}
-              onDelete={() => deleteBudget(budget.id)}
+              onDelete={() => handleDelete(budget.id)}
               onEdit={() => setEditingId(budget.id)}
             />
           ))
