@@ -3,6 +3,7 @@ import EmptyState from "../components/common/EmptyState";
 import { SkeletonTable } from "../components/common/Skeleton";
 import AddTransactionForm from "../components/transactions/AddTransactionForm";
 import EditTransactionForm from "../components/transactions/EditTransactionForm";
+import TransactionRow from "../components/transactions/TransactionRow";
 import { useTransactions } from "../hooks/useTransactions";
 import { useToastStore } from "../store/toastStore";
 import type { Transaction } from "../types/transaction";
@@ -118,40 +119,13 @@ export default function Transactions() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {transactions.map((transaction, index) => (
-                <tr
+              {transactions.map((transaction) => (
+                <TransactionRow
                   key={transaction.id}
-                  className="hover:bg-gray-50 transition-all duration-200 animate-fade-in"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {new Date(transaction.date).toLocaleDateString()}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {transaction.description}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    {transaction.category}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-right">
-                    {transaction.type === "income" ? "+" : "-"}$
-                    {transaction.amount.toFixed(2)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-right space-x-4">
-                    <button
-                      onClick={() => handleDelete(transaction.id)}
-                      className="text-red-600 hover:text-red-900 font-medium pointer"
-                    >
-                      Delete
-                    </button>
-                    <button
-                      onClick={() => openEditDialog(transaction)}
-                      className="text-blue-600 hover:text-blue-900 font-medium pointer"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
+                  transaction={transaction}
+                  onDelete={handleDelete}
+                  onEdit={openEditDialog}
+                />
               ))}
             </tbody>
           </table>
