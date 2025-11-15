@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { SkeletonCard } from "../components/common/Skeleton";
 import SpentBudget from "../components/budgets/SpentBudget";
 import { useTransactions } from "../hooks/useTransactions";
 import { useBudgetStore } from "../store/budgetStore";
@@ -81,7 +82,23 @@ export default function Budgets() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Budgets</h1>
+            <p className="text-gray-600 mt-1">
+              Set and track spending limits by category
+            </p>
+          </div>
+        </div>
+        <div className="space-y-4">
+          {[...Array(3)].map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   return (

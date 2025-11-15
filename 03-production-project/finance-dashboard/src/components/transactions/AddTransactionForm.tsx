@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import Spinner from "../common/Spinner";
 import {
   transactionSchema,
   type TransactionFormData,
@@ -142,8 +143,9 @@ export default function AddTransactionForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
+        {isSubmitting && <Spinner size="sm" className="text-white" />}
         {isSubmitting ? "Adding..." : "Add transaction"}
       </button>
     </form>

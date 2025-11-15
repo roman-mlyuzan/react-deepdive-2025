@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { SkeletonTable } from "../components/common/Skeleton";
 import AddTransactionForm from "../components/transactions/AddTransactionForm";
 import EditTransactionForm from "../components/transactions/EditTransactionForm";
 import { useTransactions } from "../hooks/useTransactions";
@@ -41,8 +42,11 @@ export default function Transactions() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="text-lg text-gray-600">Loading transactions...</div>
+      <div>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">Transactions</h1>
+        </div>
+        <SkeletonTable />
       </div>
     );
   }

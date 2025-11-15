@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SkeletonCard } from "../components/common/Skeleton";
 import IncomeExpansesStats from "../components/common/IncomeExpansesStats";
 import CategoryBreakdownTable from "../components/reports/CategoryBreakdownTable";
 import ReportsFilter from "../components/reports/ReportsFilter";
@@ -51,7 +52,23 @@ export default function Reports() {
     }
   };
 
-  if (loading) return <div>Loading ...</div>;
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Reports</h1>
+            <p className="text-gray-600 mt-1">Analyze your financial data</p>
+          </div>
+        </div>
+        <div className="space-y-4">
+          {[...Array(3)].map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
