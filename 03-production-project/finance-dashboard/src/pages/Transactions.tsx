@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import AddTransactionForm from "../components/transactions/AddTransactionForm";
 import EditTransactionForm from "../components/transactions/EditTransactionForm";
 import { useTransactions } from "../hooks/useTransactions";
+import { useToastStore } from "../store/toastStore";
 import type { Transaction } from "../types/transaction";
 
 export default function Transactions() {
@@ -13,6 +14,7 @@ export default function Transactions() {
     deleteTransaction,
     updateTransaction,
   } = useTransactions();
+  const { addToast } = useToastStore();
   const [dialogMode, setDialogMode] = useState<"add" | "edit" | null>(null);
   const [editingTransaction, setEditingTransaction] =
     useState<Transaction | null>(null);
@@ -59,8 +61,9 @@ export default function Transactions() {
     if (confirm("Are you sure you want to delete this transaction?")) {
       try {
         await deleteTransaction(id);
+        addToast("Transaction deleted successfully", "success");
       } catch (err) {
-        alert("Failed to delete transaction: " + err);
+        addToast("Failed to delete transaction", "error");
       }
     }
   };
