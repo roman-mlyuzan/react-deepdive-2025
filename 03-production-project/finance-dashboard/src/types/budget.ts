@@ -10,4 +10,4 @@ export interface Budget {
 
 export type BudgetFormData = Omit<Budget, "id" | "createdAt">;
 
-export type BudgetCategory = Exclude<TransactionCategory, "income" | "other">;
+export type BudgetCategory = Exclude<TransactionCategory, "income">;

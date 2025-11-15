@@ -1,5 +1,6 @@
 import { useState } from "react";
 import IncomeExpansesStats from "../components/common/IncomeExpansesStats";
+import CategoryBreakdownTable from "../components/reports/CategoryBreakdownTable";
 import ReportsFilter from "../components/reports/ReportsFilter";
 import { useTransactions } from "../hooks/useTransactions";
 import { ReportPeriod, type ReportPeriodType } from "../types/report";
@@ -42,11 +43,12 @@ export default function Reports() {
         onPeriodSelect={(v) => setSelectedPeriod(v)}
         onDateSelect={(v) => setSelectedDate(v)}
       />
+      <IncomeExpansesStats transactions={filteredTransactions} />
 
       <div className="text-gray-500">
         Showing {filteredTransactions.length} transactions
       </div>
-      <IncomeExpansesStats transactions={filteredTransactions} />
+      <CategoryBreakdownTable transactions={filteredTransactions} />
     </div>
   );
 }
