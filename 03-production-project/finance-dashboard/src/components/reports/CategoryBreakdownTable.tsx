@@ -13,9 +13,13 @@ export default function CategoryBreakdownTable({ transactions }: Props) {
     return (
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold mb-4">Spending by Category</h2>
-        <p className="text-center text-gray-500 py-8">
-          No expenses in this period
-        </p>
+        <div className="text-center py-12">
+          <div className="text-5xl mb-3">📊</div>
+          <p className="text-gray-600">No expenses in this period</p>
+          <p className="text-sm text-gray-500 mt-2">
+            Try selecting a different time period or add some transactions
+          </p>
+        </div>
       </div>
     );
   }

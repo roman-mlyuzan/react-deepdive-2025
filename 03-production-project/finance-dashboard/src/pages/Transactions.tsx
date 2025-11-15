@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import EmptyState from "../components/common/EmptyState";
 import { SkeletonTable } from "../components/common/Skeleton";
 import AddTransactionForm from "../components/transactions/AddTransactionForm";
 import EditTransactionForm from "../components/transactions/EditTransactionForm";
@@ -85,7 +86,15 @@ export default function Transactions() {
       </div>
 
       {transactions.length === 0 ? (
-        <div className="text-center text-gray-600">No transactions found.</div>
+        <EmptyState
+          icon="💸"
+          title="No transactions yet"
+          description="Start tracking your finances by adding your first transaction. Click the button above to get started!"
+          action={{
+            label: "Add Your First Transaction",
+            onClick: openAddDialog,
+          }}
+        />
       ) : (
         <div className="bg-white rounded-lg shadow overflow-hidden">
           <table className="w-full">

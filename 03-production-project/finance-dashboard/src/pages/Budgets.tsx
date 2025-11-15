@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import EmptyState from "../components/common/EmptyState";
 import { SkeletonCard } from "../components/common/Skeleton";
 import SpentBudget from "../components/budgets/SpentBudget";
 import { useTransactions } from "../hooks/useTransactions";
@@ -203,9 +204,15 @@ export default function Budgets() {
       )}
       <div className="space-y-4">
         {budgets.length === 0 ? (
-          <div className="bg-white p-6 rounded-lg shadow-md text-center text-gray-500">
-            No budgets yet. Add one to start tracking your spending limits!
-          </div>
+          <EmptyState
+            icon="🎯"
+            title="No budgets set"
+            description="Set spending limits for different categories to stay on track with your financial goals. Start by creating your first budget!"
+            action={{
+              label: "Create Your First Budget",
+              onClick: () => setIsAdding(true),
+            }}
+          />
         ) : (
           budgets.map((budget, index) => (
             <div

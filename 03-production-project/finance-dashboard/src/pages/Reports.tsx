@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EmptyState from "../components/common/EmptyState";
 import { SkeletonCard } from "../components/common/Skeleton";
 import IncomeExpansesStats from "../components/common/IncomeExpansesStats";
 import CategoryBreakdownTable from "../components/reports/CategoryBreakdownTable";
@@ -66,6 +67,22 @@ export default function Reports() {
             <SkeletonCard key={i} />
           ))}
         </div>
+      </div>
+    );
+  }
+
+  if (transactions.length === 0) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Reports</h1>
+          <p className="text-gray-600 mt-1">Analyze your financial data</p>
+        </div>
+        <EmptyState
+          icon="📈"
+          title="No data to analyze"
+          description="Start adding transactions to see detailed reports and insights about your spending patterns."
+        />
       </div>
     );
   }
