@@ -5,8 +5,8 @@ export default function Sidebar() {
     { to: "/", label: "Dashboard", icon: "📊" },
     { to: "/transactions", label: "Transactions", icon: "💳" },
     { to: "/reports", label: "Reports", icon: "📈" },
-    { to: "/settings", label: "Settings", icon: "⚙️" },
     { to: "/budgets", label: "Budgets", icon: "💰" },
+    { to: "/settings", label: "Settings", icon: "⚙️" },
   ];
 
   return (
