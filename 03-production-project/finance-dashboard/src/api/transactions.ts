@@ -4,6 +4,7 @@ const API_BASE_URL = "http://localhost:3001";
 
 export const transactionApi = {
   getAll: async (): Promise<Transaction[]> => {
+    // Custom server returns all transactions without pagination
     const response = await fetch(`${API_BASE_URL}/transactions`);
     if (!response.ok) {
       throw new Error("Failed to fetch transactions");

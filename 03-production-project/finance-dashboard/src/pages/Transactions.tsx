@@ -4,9 +4,13 @@ import { SkeletonTable } from "../components/common/Skeleton";
 import AddTransactionForm from "../components/transactions/AddTransactionForm";
 import EditTransactionForm from "../components/transactions/EditTransactionForm";
 import TransactionRow from "../components/transactions/TransactionRow";
+import VirtualizedTransactionTable from "../components/transactions/VirtualizedTransactionTable";
 import { useTransactions } from "../hooks/useTransactions";
 import { useToastStore } from "../store/toastStore";
 import type { Transaction } from "../types/transaction";
+
+// Threshold for switching to virtual scrolling
+const VIRTUALIZATION_THRESHOLD = 5000;
 
 export default function Transactions() {
   const {
@@ -96,7 +100,15 @@ export default function Transactions() {
             onClick: openAddDialog,
           }}
         />
+      ) : transactions.length > VIRTUALIZATION_THRESHOLD ? (
+        // Use virtual scrolling for large datasets (50+ items)
+        <VirtualizedTransactionTable
+          transactions={transactions}
+          onDelete={handleDelete}
+          onEdit={openEditDialog}
+        />
       ) : (
+        // Use regular table for small datasets (better for animations)
         <div className="bg-white rounded-lg shadow overflow-hidden">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
