@@ -1,5 +1,5 @@
+import IncomeExpansesStats from "../components/common/IncomeExpansesStats";
 import { IncomeExpansesChart } from "../components/dashboard/IncomeExpansesChart";
-import IncomeExpansesStats from "../components/dashboard/IncomeExpansesStats";
 import SpendingByCategoryChart from "../components/dashboard/SpendingByCategoryChart";
 import { useTransactions } from "../hooks/useTransactions";
 
