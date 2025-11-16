@@ -1,12 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Spinner from "../common/Spinner";
 import {
   transactionSchema,
   type TransactionFormData,
 } from "../../schemas/transactionSchema";
 import { useToastStore } from "../../store/toastStore";
 import { type Transaction } from "../../types/transaction";
+import Spinner from "../common/Spinner";
 
 interface AddTransactionFormProps {
   onSuccess: () => void;
@@ -21,11 +22,21 @@ export default function AddTransactionForm({
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<TransactionFormData>({
     resolver: zodResolver(transactionSchema),
   });
+
+  const selectedType = watch("type");
+
+  useEffect(() => {
+    if (selectedType === "income") {
+      setValue("category", "income");
+    }
+  }, [selectedType]);
 
   const onSubmit = async (data: TransactionFormData) => {
     try {
@@ -112,7 +123,7 @@ export default function AddTransactionForm({
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
           <option value="">Select category</option>
-          <option value="income">Income</option>
+          {selectedType === "income" && <option value="income">Income</option>}
           <option value="food">Food</option>
           <option value="transport">Transport</option>
           <option value="utilities">Utilities</option>

@@ -10,7 +10,7 @@ import { useToastStore } from "../store/toastStore";
 import type { Transaction } from "../types/transaction";
 
 // Threshold for switching to virtual scrolling
-const VIRTUALIZATION_THRESHOLD = 5000;
+const VIRTUALIZATION_THRESHOLD = 50;
 
 export default function Transactions() {
   const {
