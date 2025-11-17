@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import {
   Cell,
   Pie,
@@ -16,25 +16,27 @@ interface SpendingByCategoryChart {
 }
 
 function SpendingByCategoryChart({ transactions }: SpendingByCategoryChart) {
-  const categoryData: CategoryEntry[] = transactions
-    .filter((t) => t.type === "expense")
-    .reduce((acc: CategoryEntry[], transaction: Transaction) => {
-      const category = transaction.category;
-      const existingEntry = acc.find(
-        (entry: CategoryEntry) => entry.category === category
-      );
+  const categoryData: CategoryEntry[] = useMemo(() => {
+    return [...transactions]
+      .filter((t) => t.type === "expense")
+      .reduce((acc: CategoryEntry[], transaction: Transaction) => {
+        const category = transaction.category;
+        const existingEntry = acc.find(
+          (entry: CategoryEntry) => entry.category === category
+        );
 
-      if (existingEntry) {
-        existingEntry.amount += transaction.amount;
-      } else {
-        acc.push({
-          category,
-          amount: transaction.amount,
-        });
-      }
+        if (existingEntry) {
+          existingEntry.amount += transaction.amount;
+        } else {
+          acc.push({
+            category,
+            amount: transaction.amount,
+          });
+        }
 
-      return acc;
-    }, []);
+        return acc;
+      }, []);
+  }, [transactions]);
 
   // @ts-expect-error - Recharts Pie label type issue
   const renderLabel: PieLabel = ({

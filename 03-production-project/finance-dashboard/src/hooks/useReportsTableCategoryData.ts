@@ -3,7 +3,7 @@ import type { CategoryData } from "../types/category";
 import type { GroupedExpensesReportEntry } from "../types/report";
 import type { Transaction } from "../types/transaction";
 
-export function useCategoryData(transactions: Transaction[]) {
+export function useReportsTableCategoryData(transactions: Transaction[]) {
   const categoryData = useMemo(() => {
     const expenses = transactions.filter((t) => t.type === "expense");
 

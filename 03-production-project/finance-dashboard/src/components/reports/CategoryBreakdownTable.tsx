@@ -1,4 +1,4 @@
-import { useCategoryData } from "../../hooks/useCategoryData";
+import { useReportsTableCategoryData } from "../../hooks/useReportsTableCategoryData";
 import type { Transaction } from "../../types/transaction";
 import { formatCurrency } from "../../utils/currency";
 
@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function CategoryBreakdownTable({ transactions }: Props) {
-  const categoryData = useCategoryData(transactions);
+  const categoryData = useReportsTableCategoryData(transactions);
 
   if (categoryData.length === 0) {
     return (
