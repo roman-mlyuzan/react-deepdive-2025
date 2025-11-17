@@ -1,16 +1,17 @@
 import { useState } from "react";
 import EmptyState from "../components/common/EmptyState";
-import { SkeletonCard } from "../components/common/Skeleton";
 import IncomeExpansesStats from "../components/common/IncomeExpansesStats";
+import { SkeletonCard } from "../components/common/Skeleton";
 import CategoryBreakdownTable from "../components/reports/CategoryBreakdownTable";
 import ReportsFilter from "../components/reports/ReportsFilter";
-import { useTransactions } from "../hooks/useTransactions";
+import { useTransactionsQuery } from "../hooks/useTransactionsQuery";
 import { useToastStore } from "../store/toastStore";
 import { ReportPeriod, type ReportPeriodType } from "../types/report";
 import { exportTransactionsToCsv } from "../utils/exportToCsv";
 
 export default function Reports() {
-  const { transactions, loading } = useTransactions();
+  const { data: transactions = [], isLoading: loading } =
+    useTransactionsQuery();
   const { addToast } = useToastStore();
   const [selectedPeriod, setSelectedPeriod] = useState<ReportPeriodType>(
     ReportPeriod.MONTH
