@@ -5,20 +5,20 @@ import {
   transactionSchema,
   type TransactionFormData,
 } from "../../schemas/transactionSchema";
-import { useToastStore } from "../../store/toastStore";
 import { type Transaction } from "../../types/transaction";
 import Spinner from "../common/Spinner";
 
 interface AddTransactionFormProps {
   onSuccess: () => void;
-  onAddTransaction: (transaction: Omit<Transaction, "id">) => Promise<void>;
+  onAddTransaction: (
+    transaction: Omit<Transaction, "id">
+  ) => Promise<Transaction>;
 }
 
 export default function AddTransactionForm({
   onSuccess,
   onAddTransaction,
 }: AddTransactionFormProps) {
-  const { addToast } = useToastStore();
   const {
     register,
     handleSubmit,
@@ -41,11 +41,9 @@ export default function AddTransactionForm({
   const onSubmit = async (data: TransactionFormData) => {
     try {
       await onAddTransaction(data);
-      addToast("Transaction added successfully", "success");
       reset();
       onSuccess();
     } catch (error) {
-      addToast("Failed to add transaction", "error");
       console.error("Failed to add transaction:", error);
     }
   };

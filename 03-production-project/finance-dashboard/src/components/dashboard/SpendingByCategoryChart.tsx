@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
   Cell,
   Pie,
@@ -5,6 +6,8 @@ import {
   ResponsiveContainer,
   type PieLabel,
 } from "recharts";
+import { CATEGORY_COLORS } from "../../const/category";
+import type { CategoryEntry } from "../../types/category";
 import type { Transaction } from "../../types/transaction";
 import { formatCurrency } from "../../utils/currency";
 
@@ -12,26 +15,7 @@ interface SpendingByCategoryChart {
   transactions: Transaction[];
 }
 
-interface CategoryEntry {
-  category: string;
-  amount: number;
-  [key: string]: string | number;
-}
-
-const CATEGORY_COLORS: Record<string, string> = {
-  food: "#FF6384",
-  transport: "#36A2EB",
-  entertainment: "#FFCE56",
-  bills: "#4BC0C0",
-  shopping: "#9966FF",
-  health: "#FF9F40",
-  other: "#C9CBCF",
-  income: "#4CAF50", // Just in case, though we filter it out
-};
-
-export default function SpendingByCategoryChart({
-  transactions,
-}: SpendingByCategoryChart) {
+function SpendingByCategoryChart({ transactions }: SpendingByCategoryChart) {
   const categoryData: CategoryEntry[] = transactions
     .filter((t) => t.type === "expense")
     .reduce((acc: CategoryEntry[], transaction: Transaction) => {
@@ -93,3 +77,5 @@ export default function SpendingByCategoryChart({
     </div>
   );
 }
+
+export default memo(SpendingByCategoryChart);

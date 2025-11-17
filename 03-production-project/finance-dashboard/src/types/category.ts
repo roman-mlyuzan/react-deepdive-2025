@@ -4,3 +4,9 @@ export interface CategoryData {
   count: number;
   percentage: number;
 }
+
+export interface CategoryEntry {
+  category: string;
+  amount: number;
+  [key: string]: string | number;
+}

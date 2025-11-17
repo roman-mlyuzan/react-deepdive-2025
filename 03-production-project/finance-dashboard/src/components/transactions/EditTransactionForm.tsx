@@ -5,7 +5,6 @@ import {
   transactionSchema,
   type TransactionFormData,
 } from "../../schemas/transactionSchema";
-import { useToastStore } from "../../store/toastStore";
 import type { Transaction } from "../../types/transaction";
 import Spinner from "../common/Spinner";
 
@@ -15,7 +14,7 @@ interface editTransactionFormProps {
   onEditTransaction: (
     id: number,
     transaction: Omit<Transaction, "id">
-  ) => Promise<void>;
+  ) => Promise<Transaction>;
 }
 
 export default function EditTransactionForm({
@@ -23,7 +22,6 @@ export default function EditTransactionForm({
   onSuccess,
   onEditTransaction,
 }: editTransactionFormProps) {
-  const { addToast } = useToastStore();
   const {
     register,
     handleSubmit,
@@ -47,11 +45,9 @@ export default function EditTransactionForm({
   const onSubmit = async (data: TransactionFormData) => {
     try {
       await onEditTransaction(transaction.id, data);
-      addToast("Transaction updated successfully", "success");
       reset();
       onSuccess();
     } catch (error) {
-      addToast("Failed to update transaction", "error");
       console.error("Failed to edit transaction:", error);
     }
   };

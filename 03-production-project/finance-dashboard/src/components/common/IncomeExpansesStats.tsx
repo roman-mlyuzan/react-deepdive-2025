@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { Transaction } from "../../types/transaction";
 import { formatCurrency } from "../../utils/currency";
 
@@ -5,9 +6,7 @@ interface IncomeExpansesStats {
   transactions: Transaction[];
 }
 
-export default function IncomeExpansesStats({
-  transactions,
-}: IncomeExpansesStats) {
+function IncomeExpansesStats({ transactions }: IncomeExpansesStats) {
   const totalIncome = transactions
     .filter((t) => t.type === "income")
     .reduce((sum, t) => sum + t.amount, 0);
@@ -53,3 +52,5 @@ export default function IncomeExpansesStats({
     </div>
   );
 }
+
+export default memo(IncomeExpansesStats);

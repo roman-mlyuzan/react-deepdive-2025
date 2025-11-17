@@ -5,8 +5,8 @@ import AddTransactionForm from "../components/transactions/AddTransactionForm";
 import EditTransactionForm from "../components/transactions/EditTransactionForm";
 import TransactionRow from "../components/transactions/TransactionRow";
 import VirtualizedTransactionTable from "../components/transactions/VirtualizedTransactionTable";
-import { useTransactions } from "../hooks/useTransactions";
-import { useToastStore } from "../store/toastStore";
+import { useTransactionMutations } from "../hooks/useTransactionMutations";
+import { useTransactionsQuery } from "../hooks/useTransactionsQuery";
 import type { Transaction } from "../types/transaction";
 
 // Threshold for switching to virtual scrolling
@@ -14,14 +14,12 @@ const VIRTUALIZATION_THRESHOLD = 50;
 
 export default function Transactions() {
   const {
-    transactions,
-    loading,
+    data: transactions = [],
+    isLoading: loading,
     error,
-    createTransaction,
-    deleteTransaction,
-    updateTransaction,
-  } = useTransactions();
-  const { addToast } = useToastStore();
+  } = useTransactionsQuery();
+  const mutations = useTransactionMutations();
+
   const [dialogMode, setDialogMode] = useState<"add" | "edit" | null>(null);
   const [editingTransaction, setEditingTransaction] =
     useState<Transaction | null>(null);
@@ -61,21 +59,27 @@ export default function Transactions() {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="text-lg text-red-600">
-          Error loading transactions: {error}
+          Error loading transactions: {error?.message || String(error)}
         </div>
       </div>
     );
   }
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = (id: number) => {
     if (confirm("Are you sure you want to delete this transaction?")) {
-      try {
-        await deleteTransaction(id);
-        addToast("Transaction deleted successfully", "success");
-      } catch (err) {
-        addToast("Failed to delete transaction", "error");
-      }
+      mutations.remove.mutate(id);
     }
+  };
+
+  const handleCreate = async (transaction: Omit<Transaction, "id">) => {
+    return mutations.create.mutateAsync(transaction);
+  };
+
+  const handleUpdate = async (
+    id: number,
+    transaction: Omit<Transaction, "id">
+  ) => {
+    return mutations.update.mutateAsync({ id, transaction });
   };
 
   return (
@@ -156,13 +160,13 @@ export default function Transactions() {
       >
         {dialogMode === "add" && (
           <AddTransactionForm
-            onAddTransaction={createTransaction}
+            onAddTransaction={handleCreate}
             onSuccess={closeDialog}
           />
         )}
         {dialogMode === "edit" && editingTransaction && (
           <EditTransactionForm
-            onEditTransaction={updateTransaction}
+            onEditTransaction={handleUpdate}
             onSuccess={closeDialog}
             transaction={editingTransaction}
           />

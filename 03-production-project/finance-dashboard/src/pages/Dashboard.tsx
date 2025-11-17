@@ -1,12 +1,12 @@
 import IncomeExpansesStats from "../components/common/IncomeExpansesStats";
-import { IncomeExpansesChart } from "../components/dashboard/IncomeExpansesChart";
+import IncomeExpansesChart from "../components/dashboard/IncomeExpansesChart";
 import SpendingByCategoryChart from "../components/dashboard/SpendingByCategoryChart";
-import { useTransactions } from "../hooks/useTransactions";
+import { useTransactionsQuery } from "../hooks/useTransactionsQuery";
 
 export default function Dashboard() {
-  const { transactions, loading } = useTransactions();
+  const { data: transactions = [], isLoading } = useTransactionsQuery();
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="text-lg text-gray-600">Loading dashboard...</div>
