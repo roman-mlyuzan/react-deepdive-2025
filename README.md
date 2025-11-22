@@ -109,7 +109,8 @@ Deep dive into React Hooks and side effects.
 **Status:** ✅ Complete (Days 8-10)
 
 **Tech Stack:**
-- React 18 + TypeScript + Vite
+
+- React 19 + TypeScript + Vite
 - React Query (TanStack Query v5) - Server state management
 - React Router - Client-side routing
 - React Hook Form + Zod - Form validation
@@ -118,6 +119,7 @@ Deep dive into React Hooks and side effects.
 - Zustand - Client state (toasts)
 
 **Key Features:**
+
 - Transaction CRUD with smart caching
 - Dashboard with interactive charts
 - Reports with date filtering and CSV export
@@ -127,6 +129,7 @@ Deep dive into React Hooks and side effects.
 - Protected routes with authentication
 
 **Advanced Patterns Implemented:**
+
 - React Query mutations with cache invalidation
 - Custom hooks (`useTransactionsQuery`, `useTransactionMutations`)
 - Performance optimization with `useMemo` and `React.memo`
@@ -136,6 +139,7 @@ Deep dive into React Hooks and side effects.
 - CSS Grid for perfect column alignment
 
 **What I Learned:**
+
 - Server state management best practices
 - Performance at scale (handling large datasets)
 - Production-ready error handling
@@ -188,13 +192,93 @@ Deep dive into React Hooks and side effects.
 - ✅ Toast notifications with Zustand
 - ✅ TypeScript throughout with proper types
 
-**Next: Next.js Deep Dive** ⏳ Starting
+**Day 11: Next.js App Router Fundamentals** ✅ Complete
 
-- Server Components and App Router
-- Server-side rendering patterns
-- API routes and full-stack capabilities
-- Advanced routing and layouts
-- Data fetching strategies
+- Understanding Next.js philosophy and problems it solves
+- Server Components vs Client Components
+- File-based routing with App Router
+- Dynamic routes with `[slug]` parameters
+- Component architecture and refactoring
+- Blog application with:
+  - Home page with post list (Server Component)
+  - Individual blog posts (dynamic routes)
+  - About page (static route)
+  - Interactive Like button (Client Component)
+  - Shared layout with navigation
+  - Reusable components (Container, PostCard, SiteHeader)
+
+**Day 12: Server Actions, Loading & Error Handling** ✅ Complete
+
+- **Server Actions:**
+  - `"use server"` directive and proper file organization
+  - `useActionState` hook for form state management
+  - Form validation with error handling
+  - Preserving user input on validation errors using `defaultValue`
+  - Form reset on success with pure `key` prop pattern
+  - Progressive enhancement (forms work without JavaScript)
+  - Cache invalidation with `revalidatePath`
+
+- **Loading States (Suspense Boundaries):**
+  - Root `loading.tsx` with skeleton UI for home page
+  - Route-specific `loading.tsx` for blog posts
+  - Animated loading skeletons with `animate-pulse`
+  - Automatic Suspense boundaries in Next.js App Router
+
+- **Error Handling:**
+  - Error boundary with `error.tsx` (Client Component)
+  - Error logging with `useEffect`
+  - User-friendly error messages with retry functionality
+  - Custom 404 page with `not-found.tsx`
+
+- **Comment System Implementation:**
+  - Server Action for creating comments
+  - Client Component form with state preservation
+  - TypeScript with optional properties pattern
+  - Loading states with `isPending`
+
+- **Key Learnings:**
+  - React 19 purity rules (no `Date.now()` in render)
+  - Uncontrolled inputs vs controlled inputs
+  - DRY patterns with helper functions
+  - Avoided over-engineering with discriminated unions
+  - Next.js special files: `loading.tsx`, `error.tsx`, `not-found.tsx`
+  - Error boundaries must be Client Components
+
+**Day 13: Advanced Next.js Patterns** ✅ Complete
+
+- **Dynamic Metadata & SEO:**
+  - Title templates with `%s` placeholder pattern
+  - Open Graph tags for social media sharing (Facebook, LinkedIn)
+  - Twitter Card metadata
+  - Per-page dynamic metadata with `generateMetadata`
+  - Article-specific metadata (publishedTime, authors)
+
+- **Streaming with Suspense:**
+  - Progressive page rendering (post renders, then comments stream in)
+  - Created CommentsSkeleton loading UI
+  - Wrapped async Server Components in Suspense boundaries
+  - Improved perceived performance
+
+- **Parallel Data Fetching:**
+  - Refactored data model from `postId` to `slug` for parallel queries
+  - Fetching post and comments simultaneously
+  - Understanding parallelization constraints (dependent vs independent requests)
+  - Using React's `use()` hook pattern with promises
+
+- **Key Learnings:**
+  - Metadata hierarchy: root layout → page-level
+  - When parallel fetching works vs sequential dependencies
+  - Data model design impacts performance (slug-based > id-based for this use case)
+  - `useOptimistic` hook concept (decided overkill for simple comment form)
+  - Tradeoffs between complexity and actual UX improvements
+
+**Next: Production-Ready Patterns** ⏳ Ready to start
+
+- Route handlers (API endpoints)
+- Middleware and authentication
+- Database integration (Prisma/Drizzle)
+- Deployment optimization
+- Real production project
 
 ## Key Insights: Angular → React
 
@@ -248,19 +332,22 @@ Deep dive into React Hooks and side effects.
 
 ## Progress Tracking
 
-| Phase                    | Status      | Completion | Current Focus       |
-| ------------------------ | ----------- | ---------- | ------------------- |
-| Fundamentals Review      | ✅ Complete | 100%       | -                   |
-| Hooks Mastery            | ✅ Complete | 100%       | -                   |
-| Performance Optimization | ✅ Complete | 100%       | -                   |
-| Production Project       | ✅ Complete | 100%       | Finance Dashboard   |
-| Next.js Deep Dive        | ⏳ Starting | 0%         | App Router & SSR    |
+| Phase                    | Status        | Completion | Current Focus               |
+| ------------------------ | ------------- | ---------- | --------------------------- |
+| Fundamentals Review      | ✅ Complete   | 100%       | -                           |
+| Hooks Mastery            | ✅ Complete   | 100%       | -                           |
+| Performance Optimization | ✅ Complete   | 100%       | -                           |
+| Production Project       | ✅ Complete   | 100%       | Finance Dashboard           |
+| Next.js App Router       | ✅ Complete   | 100%       | Blog with Server Components |
+| Server Actions & UX      | ✅ Complete   | 100%       | Forms, Loading, Errors      |
+| Advanced Next.js         | ✅ Complete   | 100%       | Metadata, Streaming, Parallel Fetching |
+| Production Patterns      | ⏳ In Progress | 0%         | API Routes, Auth, DB        |
 
 ## Technical Stack
 
 **Mastered:**
 
-- React 18.3 with Hooks
+- React 19 with Hooks
 - TypeScript (comprehensive typing)
 - Vite (build tool)
 - React Router v6 (client-side routing)
@@ -269,13 +356,20 @@ Deep dive into React Hooks and side effects.
 - Zustand (lightweight state)
 - TailwindCSS
 - @tanstack/react-virtual
+- Next.js 16 (App Router, Server Components, Server Actions)
+- File-based routing and dynamic routes
+- Form state management with useActionState
+- Progressive enhancement patterns
+- Dynamic metadata & SEO optimization
+- Streaming with Suspense boundaries
+- Parallel data fetching patterns
 
-**Next to Learn:**
+**Currently Learning:**
 
-- Next.js 15 (App Router, Server Components)
-- Server-side rendering patterns
-- API routes and full-stack Next.js
-- Advanced caching strategies
+- Production-ready Next.js patterns
+- Route handlers (API endpoints)
+- Authentication & middleware
+- Database integration (Prisma/Drizzle)
 
 ## Resources
 
@@ -299,7 +393,8 @@ Deep dive into React Hooks and side effects.
 - ✅ Build production-quality, performant applications
 - ✅ Master React Query for server state management
 - ✅ Implement virtual scrolling and advanced performance techniques
-- ⏳ Learn Next.js App Router and Server Components
+- ✅ Learn Next.js App Router and Server Components
+- ⏳ Master advanced Next.js patterns (Server Actions, caching, streaming)
 - ⏳ Successfully interview for senior React positions
 - ⏳ Contribute to React open source ecosystem
 
@@ -310,6 +405,6 @@ Deep dive into React Hooks and side effects.
 
 ---
 
-**Repository Status:** Active Learning | **Last Updated:** 11/17/25 | **Current Phase:** Production Project Complete → Next.js
+**Repository Status:** Active Learning | **Last Updated:** 11/19/25 | **Current Phase:** Next.js App Router → Advanced Patterns
 
 _Systematic learning, documented progress, production-ready results._
